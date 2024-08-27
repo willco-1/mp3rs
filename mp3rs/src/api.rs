@@ -10,7 +10,7 @@ pub struct Recording {
 
 #[derive(Deserialize, Debug)]
 pub struct ArtistCredit {
-   pub name: String,
+   pub name: &str,
 }
 
 pub async fn get_recording_metadata(title: &str, config: &Config) -> Result<Recording, reqwest::Error> {
@@ -22,6 +22,6 @@ pub async fn get_recording_metadata(title: &str, config: &Config) -> Result<Reco
         .await?;
 
     let recordings: Vec<Recording> = response.json().await?;
-    // Here you might want to handle which recording to return if multiple are found
+
     Ok(recordings.into_iter().next().unwrap())
 }
